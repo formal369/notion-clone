@@ -16,13 +16,15 @@ const AuthLayout = () => {
             flexDirection: "column"
           }}
         >
-          <img src={notionLogo} alt=""
-            style={{width: 100, height: 100, marginBottom: 3 }}
+          <img 
+            src={notionLogo} 
+            alt=""
+            style={{ width: 100, height: 100, marginBottom: 3 }}
           />
           Notionクローン開発
         </Box>
+        <Outlet />
       </Container>
-      <Outlet />
     </div>
   )
 }
