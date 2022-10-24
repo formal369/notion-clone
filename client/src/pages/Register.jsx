@@ -52,7 +52,18 @@ const Register = () => {
       localStorage.setItem("token", res.token);
       console.log("新規登録に成功しました");
     } catch (err) {
-      console.log(err);
+      const errors = err.data.errors;
+      errors.forEach((err) => {
+        if (err.param === "username") {
+          setUsernameErrText(err.msg);
+        }
+        if (err.param === "password") {
+          setPasswordErrText(err.msg);
+        }
+        if (err.param === "confirmPassword") {
+          setConfirmErrText(err.msg);
+        }
+      });
     }
   };
 
@@ -67,6 +78,7 @@ const Register = () => {
           name="username"
           required
           helperText={usernameErrText}
+          error={usernameErrText !== ""}
         />
         <TextField
           fullWidth
@@ -77,6 +89,7 @@ const Register = () => {
           type="password"
           required
           helperText={passwordErrText}
+          error={passwordErrText !== ""}
         />
         <TextField
           fullWidth
@@ -87,6 +100,7 @@ const Register = () => {
           type="password"
           required
           helperText={confirmErrText}
+          error={confirmErrText !== ""}
         />
         <LoadingButton
           sx={{ mt: 3, mb: 2 }}
